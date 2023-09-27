@@ -1,0 +1,16 @@
+{
+    "title": "Brofu's Talk",
+    "sortedBy": "-",
+    "plugins": ["plantuml-cloud"] ,
+    "pluginsConfig": {
+    "plantuml-cloud": {
+      "umlPath": "images/uml",
+      "protocol": "http",
+      "type": "plantuml-server",
+      "host": "www.plantuml.com",
+      "port": "80",
+      "path": "/plantuml/svg"
+    }
+  }
+
+}
