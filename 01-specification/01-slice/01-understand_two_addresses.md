@@ -56,7 +56,7 @@ func StringSliceAddresses() {
 
 ```
 
-In this code snipest, `fmt.Println("%p, %p\n", a, &a)`, would print the addresses of the `array under layer` and `the slice header`
+In this code gist, `fmt.Println("%p, %p\n", a, &a)`, would print the addresses of the `array under layer` and `the slice header`
 
 Let's use the `dlv` tool to verify this.
 
@@ -66,7 +66,7 @@ Let's use the `dlv` tool to verify this.
 dlv debug main.go
 b main.main // set breakpoint at entry point
 ```
-* And then, let's exam the of 
+* And then, let's exam the memory of `a` 
 
 ```
 > github.com/brofu/deepingo/slice.StringSliceAddresses() ./slice/examples.go:10 (PC: 0x10aea9f)
