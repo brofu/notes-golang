@@ -261,7 +261,7 @@ So actually **there are 2 addresses for string** also. And the hidden address is
 internal/unsafeheader.String {Data: unsafe.Pointer(0x10c67b7), Len: 4}  //NOTE: the address of bytes array is 0x10c67b7
 ```
 
-#### Two Addresses - Integer Slice
+#### Two Addresses - integer slice
 
 Similar mechanism for integer slice. But the difference from string slice is that, the data stored in the under layer array is `*int`, so elements should be accessed by offset 8 * n (on 64 bit system). 
 
@@ -296,7 +296,7 @@ internal/unsafeheader.Slice {Data: unsafe.Pointer(0xc00001a100), Len: 3, Cap: 4}
 3
 ```
 
-#### Two Addresses - struct 
+#### Two Addresses - struct slice
 
 Similar machanism  for struct slice. 
 * `[]StructType`, the data stored in under layer array, it's the value (an instance) of `StructType`. But
@@ -389,7 +389,7 @@ unsafe.Pointer(0xc00000c078)
 github.com/brofu/deepingo/slice.Test {A: "s2", B: 2}
 ```
 
-#### Two Addresses - map
+#### Two Addresses - map slice
 
 Similar mechanism for map slice. The data stored in under layer array is pointer to the map.
 
