@@ -50,6 +50,17 @@ func WorkControl() {
 }
 ```
 
+Scenario 3. Define simple interface implementations
+
+```
+
+type InterfaceImplementation struct{}
+
+func(i *InterfaceImplementation) Method() {
+}
+
+```
+
 But why should we use it like this? Mainly reason is **empty struct uses NO memory space**
 
 
