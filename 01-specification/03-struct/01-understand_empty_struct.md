@@ -1,12 +1,10 @@
-# Struct
+## Empty Struct
 
-#### Empty Struct (struct{})
+### Usage
 
-**Usage**
+There are 3 typical usage of empty struct `struct{}`.
 
-There are 2 typical usage of empty struct.
-
-Scenario 1. Used as a place holder. 
+* **Used as a place holder.** 
 
 ```
 // for example, implementation of HashSet
@@ -28,7 +26,7 @@ func (s Set) Remove(item int) {
 }
 ```
 
-Scenario 2. Use as signal without data
+* **Use as signal without data**
 
 ```
 // Used to pass signal
@@ -50,25 +48,23 @@ func WorkControl() {
 }
 ```
 
-Scenario 3. Define simple interface implementations
+* **Define simple interface implementations**
 
 ```
-
 type InterfaceImplementation struct{}
 
 func(i *InterfaceImplementation) Method() {
 }
-
 ```
 
-But why should we use it like this? Mainly reason is **empty struct uses NO memory space**
+But why should we use it like this? Mainly reason is **struct{} uses NO memory space**
 
 
-**zerobase**
+### zerobase
 
 Before we talk about **zerobase**, let check this code piece first
 
-```{#numCode .R .numberLines}
+```
 func ExploreZerobase() {
 	a := struct{}{}
 	b := struct{}{}
@@ -77,13 +73,12 @@ func ExploreZerobase() {
 	//fmt.Println(&a, &b)
 	fmt.Println(&a == &b)
 }
-
 ```
    
 
 
 
-**References**
+### References
 
 1. https://mp.weixin.qq.com/s/KaAFRLKlWrefXQxRtliUjw
 

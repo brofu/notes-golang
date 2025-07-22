@@ -1,6 +1,6 @@
-# Filed Alignment
+## Struct Filed Alignment
 
-## What's Filed Alignment
+### What's Filed Alignment
 
 Let's check the following code 
 
@@ -30,6 +30,8 @@ fmt.Printf("\tOffset:    %d\n", unsafe.Offsetof(s2.B))
 fmt.Printf("\tOffset:    %d\n", unsafe.Offsetof(s2.C))
 ```
 
+If we check the comments of function `unsafe.Offsetof`, we can find the following texts:
+
 >// Offsetof returns the offset within the struct of the field represented by x,
 >
 >// which must be of the form structValue.field. In other words, it returns the
@@ -43,7 +45,7 @@ fmt.Printf("\tOffset:    %d\n", unsafe.Offsetof(s2.C))
 
 As we can see, for the case of `MyStruct`, the `memory padding` is reflected in the offset. It's memory waist definitely. So, the solution of `MyStruct2` is better
 
-## An Example From Golang 
+### An Example From Golang Source Code
 
 ```
 // go1.23/src/internal/abi/iface.go
@@ -56,8 +58,25 @@ type ITab struct {
 }
 
 ```
+The `ITab` struct is used by the struct of the `non empty interface`. The whole definition is like that 
+
+```
+// go1.23/src/runtime/runtime2.go
+
+type iface struct {
+	tab  *itab
+	data unsafe.Pointer
+}
+```
 
 The `ITab.Hash` has only 4 bytes. So on the 64bit CPU platform, there would be `memory padding` for it for the memory alignment. But why NOT define `ITab.Func` before `ITab.Hash`, so that it can save around 4 bytes from padding? 
 
 That's because `Fun [1]uintptr` is actually a `placeholder` for a `dynamically sized array of method function pointers`. And the `runtime` would actually append more memory space at the end of the `ITab` struct.
+
+
+### References
+
+* Golang Source Code v1.23
+* Gemini-2.5-pro
+
 
