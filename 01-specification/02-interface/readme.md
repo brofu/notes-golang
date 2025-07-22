@@ -3,8 +3,8 @@
 Notes of `Golang Interface`. The following topics are included so far:
 
 * Interface Specification
-    * [Empty and Non-Empty Interface]()
-    * [`nil` interface]()
+    * [Empty and Non-Empty Interface](001-empty-and-non-empty-interface.html)
+    * [`NIL` Interface]()
     
 * Generics Supporting
     * [Syntax Constraints]()

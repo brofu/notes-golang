@@ -4,6 +4,7 @@
   - [Slice](01-specification/01-slice/readme.md)
     * [Understand Two Addresses](01-specification/01-slice/01-understand_two_addresses.md)
   - [Interface](01-specification/02-interface/readme.md)
+    * [Empty And Non Empty Interface](01-specification/02-interface/001-empty-and-non-empty-interface.md)
     * [Delegation Pattern](01-specification/02-interface/200-delegation-pattern.md)
   - [Struct](01-specification/03-struct/readme.md)
     * [Understand Empty Struct](01-specification/03-struct/01-understand_empty_struct.md)
