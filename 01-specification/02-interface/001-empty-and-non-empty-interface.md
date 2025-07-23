@@ -97,7 +97,181 @@ From the code snippet, we can tell that,
 
 ### More Details about `Non-Empty` Interface
 
+So, for an `non-empty interface`, what's workflow when we call an method based on it? Let's check this code 
 
+```
+type People interface {
+	Name() string
+	Work() string
+}
+
+type Teacher struct{}
+
+func (t *Teacher) Name() string {
+	return "teacher"
+}
+
+func (t *Teacher) Work() string {
+	return "teach"
+}
+
+type Student struct{}
+
+func (s *Student) Name() string {
+	return "student"
+}
+
+func (s *Student) Work() string {
+	return "study"
+}
+
+func showExampleMethodCallV2(ctx context.Context) {
+	for _, p := range []People{&Teacher{}, &Student{}} {
+		fmt.Println("method call:", p.Work())
+		fmt.Println("method call:", p.Name())
+	}
+}
+```
+
+Please note, there are 2 key points of these code snippet. And we would explain this later.
+
+1. **There is a slice of `People`, with 2 different concrete types, say that, `Student` and `Teacher`.**
+2. **`Work()` method is defined secondly, but called firstly, while `Name()` is reverse.** 
+
+OK. In short, the workflow would be (roughly) like this:
+1. Get the `*itab` data, very probably by involving `func getitab(inter *interfacetype, typ *_type, canfail bool) *itab` function (TBD)
+    * The `itab.Hash` would be helpful on this procedure.
+2. Get the method pointer (`Name()` or `Work()`) from the `*table.Fun`
+3. Get the concrete data pointer by `iface.data`
+4. Call the method with concrete data as the 1st parameter
+
+Let's verify this by debugging the above code snippet.
+
+The debugging info showed as following, when calling `p.Work()`. Pay attention to the comments inline.
+
+```
+        interface_exmaples.go:106       0x1024c99c4     e18b40f9        MOVD 272(RSP), R1
+        interface_exmaples.go:106       0x1024c99c8     220040f9        MOVD (R1), R2   // R2 get `itab` data, by pointer
+        interface_exmaples.go:106       0x1024c99cc     200440f9        MOVD 8(R1), R0  // R0 get the `iface.data`, by pointer
+        interface_exmaples.go:106       0x1024c99d0     e22300f9        MOVD R2, 64(RSP)
+        interface_exmaples.go:106       0x1024c99d4     e02700f9        MOVD R0, 72(RSP)
+        interface_exmaples.go:107       0x1024c99d8*    5b008039        MOVB (R2), R27
+=>      interface_exmaples.go:107       0x1024c99dc     411040f9        MOVD 32(R2), R1 // R1 the method `Work()`, by pointer. Why it's (R2) + 32?
+        interface_exmaples.go:107       0x1024c99e0     20003fd6        CALL (R1) // call the `Work()` method, with R0 as the 1st parameter. 
+```
+
+Note: 
+> On Apple Silicon (ARM64), Go follows the Plan 9 ABI, where the first argument to a function is passed in R0.
+
+> -- By ChatGPT
+
+
+When call `p.Name()`. Pay attention to the comments inline.
+
+```
+> [Breakpoint 3] golang_examples/interface_examples.showExampleMethodCallV2() ./interface_examples/interface_exmaples.go:108 (hits goroutine(1):1 total:1) (PC: 0x1024c9ab0)
+   103: }
+   104:
+   105: func showExampleMethodCallV2(ctx context.Context) {
+   106:         for _, p := range []People{&Teacher{}, &Student{}} {
+   107:                 fmt.Println("method call:", p.Work())
+=> 108:                 fmt.Println("method call:", p.Name())
+   109:         }
+   110: }
+   111:
+   112: func showExampleMethodCall(ctx context.Context) {
+   113:         var stu People = &Student{}
+(dlv) si
+> golang_examples/interface_examples.showExampleMethodCallV2() ./interface_examples/interface_exmaples.go:108 (PC: 0x1024c9ab4)
+        interface_exmaples.go:107       0x1024c9aa0     e28300f9        MOVD R2, 256(RSP)
+        interface_exmaples.go:107       0x1024c9aa4     e28700f9        MOVD R2, 264(RSP)
+        interface_exmaples.go:107       0x1024c9aa8     e10302aa        MOVD R2, R1
+        interface_exmaples.go:107       0x1024c9aac     15edff97        CALL fmt.Println(SB)
+        interface_exmaples.go:108       0x1024c9ab0*    e32340f9        MOVD 64(RSP), R3
+=>      interface_exmaples.go:108       0x1024c9ab4     7b008039        MOVB (R3), R27
+        interface_exmaples.go:108       0x1024c9ab8     630c40f9        MOVD 24(R3), R3  // R3 now holds the pointer of `Name()` method. Why the address is (R3)+24? 
+        interface_exmaples.go:108       0x1024c9abc     e02740f9        MOVD 72(RSP), R0 // R0 get the `iface.data` from (RSP) + 72, which is set when process `p.Work()`
+        interface_exmaples.go:108       0x1024c9ac0     60003fd6        CALL (R3) // call the `Name()` method, with R0 as the 1st parameter.
+        interface_exmaples.go:108       0x1024c9ac4     e04700f9        MOVD R0, 136(RSP)
+        interface_exmaples.go:108       0x1024c9ac8     e14b00f9        MOVD R1, 144(RSP)
+(dlv)
+```
+
+OK, let's back to the 2 import points mentioned previously.
+
+* **Why there is a slice of `People`, with 2 different concrete types, say that, `Student` and `Teacher`?**
+
+The main purpose for this, to make sure the procedure of **getting the address of method dynamically** is triggered.
+
+In contrast, if we do like this, that procedure would be NOT triggered. Since the compiler can get the method address in compiling process. Let's say, that 
+
+```
+func showExampleMethodCall(ctx context.Context) {
+	var stu People = &Student{} 
+	fmt.Println("method call:", stu.Name()) // the compiler can get the address of name statically 
+}
+```
+
+And if we debug this line, we would get this. Pay attention to the `CALL` instruction.
+
+```
+kpoint 3] golang_examples/interface_examples.showExampleMethodCall() ./interface_examples/interface_exmaples.go:114 (hits goroutine(1):1 total:1) (PC: 0x102199310)
+   109:         }
+   110: }
+   111:
+   112: func showExampleMethodCall(ctx context.Context) {
+   113:         var stu People = &Student{}
+=> 114:         fmt.Println("method call:", stu.Name())
+   115: }
+   116:
+   117: func showExample(ctx context.Context) {
+   118:
+   119:         examples := []example.GoExample{&NilInterfaceExample{}}
+(dlv) si
+> golang_examples/interface_examples.showExampleMethodCall() ./interface_examples/interface_exmaples.go:114 (PC: 0x102199314)
+        interface_exmaples.go:113       0x102199300     a10100d0        ADRP 221184(PC), R1
+        interface_exmaples.go:113       0x102199304     21801691        ADD $1440, R1, R1
+        interface_exmaples.go:113       0x102199308     e11700f9        MOVD R1, 40(RSP)
+        interface_exmaples.go:113       0x10219930c     e01b00f9        MOVD R0, 48(RSP)
+        interface_exmaples.go:114       0x102199310*    01000014        JMP 1(PC)
+=>      interface_exmaples.go:114       0x102199314     e02f00f9        MOVD R0, 88(RSP)
+        interface_exmaples.go:114       0x102199318     caffff97        CALL golang_examples/interface_examples.(*Student).Name(SB) // Get the address of `Name()` statically.
+        interface_exmaples.go:114       0x10219931c     e04700f9        MOVD R0, 136(RSP)
+        interface_exmaples.go:114       0x102199320     e14b00f9        MOVD R1, 144(RSP)
+        interface_exmaples.go:114       0x102199324     ffff06a9        STP (ZR, ZR), 104(RSP)
+        interface_exmaples.go:114       0x102199328     ffff07a9        STP (ZR, ZR), 120(RSP)
+```
+
+As we can see, the address of `Name()` is generated statically. And there is NO procedure of `getting the address` triggered.
+
+* **`Work()` method is defined secondly, but called firstly, while `Name()` is reverse**. 
+
+This is key reason why the address of `Name()` is `24(R3)`, while that of `Work()` is `32(R2)`. Let's back to the definition of `runtime.itab`
+
+```
+type ITab struct {
+	Inter *InterfaceType
+	Type  *Type
+	Hash  uint32     // copy of Type.Hash. Used for type switches.
+	Fun   [1]uintptr // variable sized. fun[0]==0 means Type does not implement Inter.
+}
+```
+
+After `memory padding`, the actual layout of `ITab` is like this 
+
+```
+type ITab struct {
+	Inter *Interfacetype // 8 bytes, offset 0
+	Type *Type           // 8 bytes, offset 8
+	hash  uint32         // 4 bytes, offset 16
+	_     [4]byte        // 4 bytes, offset 20, padding for alignment
+	Fun   [1]uintptr     // offset 24, start of method pointers, its length depends on the method number of the interface, and each pointer has the size of 8 bytes
+}
+```
+
+So, the offset of the 1st method (in the order of definition in the interface, here, it's `People`) `Name()` is `start_address` + 24, and 
+
+The offset of the 2nd method `Work()` is `start_address` + 32.
 
 
 ### References
