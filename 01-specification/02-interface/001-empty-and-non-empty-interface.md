@@ -95,7 +95,7 @@ From the code snippet, we can tell that,
   * `Type`. Same as the `Type` in `eface`, keep the concrete `Type` of the data it holds
   * `Fun`. Keeps the functions (an array of functions) implemented by the data. Yes, you are right, all the methods defined by the interface should be present here.
 
-### More Details about `Non-Empty` Interface
+### How Is the Method-Call for a `Non-Empty` Interface Processed
 
 So, for an `non-empty interface`, what's workflow when we call an method based on it? Let's check this code 
 
@@ -139,9 +139,7 @@ Please note, there are 2 key points of these code snippet. And we would explain 
 2. **`Work()` method is defined secondly, but called firstly, while `Name()` is reverse.** 
 
 OK. In short, the workflow would be (roughly) like this:
-1. Get the `*itab` data, very probably by involving `func getitab(inter *interfacetype, typ *_type, canfail bool) *itab` function (TBD)
-    * The `itab.Hash` would be helpful on this procedure.
-2. Get the method pointer (`Name()` or `Work()`) from the `*table.Fun`
+1. Get the method pointer (`Name()` or `Work()`) from the `iface.*table.Fun`
 3. Get the concrete data pointer by `iface.data`
 4. Call the method with concrete data as the 1st parameter
 
@@ -201,9 +199,9 @@ OK, let's back to the 2 import points mentioned previously.
 
 * **Why there is a slice of `People`, with 2 different concrete types, say that, `Student` and `Teacher`?**
 
-The main purpose for this, to make sure the procedure of **getting the address of method dynamically** is triggered.
+The main purpose for this, is to let the code `common` (for example, to seek the method address by address offset), instead of by `function symbol`.
 
-In contrast, if we do like this, that procedure would be NOT triggered. Since the compiler can get the method address in compiling process. Let's say, that 
+For example, if we write code like this, the code would be presented by `function symbol`, and as a result, we cannot observe the `address offset` clearly.
 
 ```
 func showExampleMethodCall(ctx context.Context) {
@@ -212,7 +210,7 @@ func showExampleMethodCall(ctx context.Context) {
 }
 ```
 
-And if we debug this line, we would get this. Pay attention to the `CALL` instruction.
+And if we debug this line, we would get this. Pay attention to the `CALL` instruction. 
 
 ```
 kpoint 3] golang_examples/interface_examples.showExampleMethodCall() ./interface_examples/interface_exmaples.go:114 (hits goroutine(1):1 total:1) (PC: 0x102199310)
@@ -235,14 +233,14 @@ kpoint 3] golang_examples/interface_examples.showExampleMethodCall() ./interface
         interface_exmaples.go:113       0x10219930c     e01b00f9        MOVD R0, 48(RSP)
         interface_exmaples.go:114       0x102199310*    01000014        JMP 1(PC)
 =>      interface_exmaples.go:114       0x102199314     e02f00f9        MOVD R0, 88(RSP)
-        interface_exmaples.go:114       0x102199318     caffff97        CALL golang_examples/interface_examples.(*Student).Name(SB) // Get the address of `Name()` statically.
+        interface_exmaples.go:114       0x102199318     caffff97        CALL golang_examples/interface_examples.(*Student).Name(SB) // Show by function symbol.
         interface_exmaples.go:114       0x10219931c     e04700f9        MOVD R0, 136(RSP)
         interface_exmaples.go:114       0x102199320     e14b00f9        MOVD R1, 144(RSP)
         interface_exmaples.go:114       0x102199324     ffff06a9        STP (ZR, ZR), 104(RSP)
         interface_exmaples.go:114       0x102199328     ffff07a9        STP (ZR, ZR), 120(RSP)
 ```
 
-As we can see, the address of `Name()` is generated statically. And there is NO procedure of `getting the address` triggered.
+As we can see, the address of `Name()` is presented by the `a Function Symbol`. And there is NO procedure of `getting the address` triggered.
 
 * **`Work()` method is defined secondly, but called firstly, while `Name()` is reverse**. 
 
@@ -272,6 +270,172 @@ type ITab struct {
 So, the offset of the 1st method (in the order of definition in the interface, here, it's `People`) `Name()` is `start_address` + 24, and 
 
 The offset of the 2nd method `Work()` is `start_address` + 32.
+
+### Another Story For Method Call to `Non-Empty` Interface
+
+We just talked about the way of method call on `non-empty interface` like this 
+
+```
+func showExampleMethodCallV2(ctx context.Context) {
+	for _, p := range []People{&Teacher{}, &Student{}} {
+		fmt.Println("method call:", p.Work())
+		fmt.Println("method call:", p.Name())
+	}
+}
+```
+
+Now, let's check a different one, say that, 
+
+```
+func showExampleMethodCallV3(ctx context.Context) {
+	for _, p := range []interface{}{&Teacher{}, &Student{}} {
+        people := p.(People)
+		fmt.Println("method call:", people.Work())
+		fmt.Println("method call:", people.Name())
+	}
+}
+```
+
+The difference of this version is that, the slice type is actually `[]interface{}`, and before the method `Name()` or`Work()` is called, a type assertion is necessary.
+
+Let's debug this to find out the under layer story. (To do this, we need to setup a break point at `runtime.getitab`)
+
+```
+(dlv) b runtime.typeAssert
+Breakpoint 3 set at 0x102fee27c for runtime.typeAssert() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:467
+(dlv) b runtime.assertE2I
+Breakpoint 4 set at 0x102fee17c for runtime.assertE2I() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:449
+(dlv) b runtime.assertE2I2
+Breakpoint 5 set at 0x102fee21c for runtime.assertE2I2() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:457
+(dlv) b 107
+Breakpoint 6 set at 0x1030999d8 for golang_examples/interface_examples.showExampleMethodCallV3() ./interface_examples/interface_exmaples.go:107
+(dlv) c
+> [Breakpoint 6] golang_examples/interface_examples.showExampleMethodCallV3() ./interface_examples/interface_exmaples.go:107 (hits goroutine(1):1 total:1) (PC: 0x1030999d8)
+   102:         showExampleMethodCallV3(ctx)
+   103: }
+   104:
+   105: func showExampleMethodCallV3(ctx context.Context) {
+   106:         for _, p := range []interface{}{&Teacher{}, &Student{}} {
+=> 107:                 people := p.(People)
+   108:                 fmt.Println("method call:", people.Work())
+   109:                 fmt.Println("method call:", people.Name())
+   110:         }
+   111: }
+   112:
+(dlv) c
+> [Breakpoint 3] runtime.typeAssert() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:467 (hits goroutine(1):1 total:1) (PC: 0x102fee27c)
+Warning: debugging optimized function
+   462: }
+   463:
+   464: // typeAssert builds an itab for the concrete type t and the
+   465: // interface type s.Inter. If the conversion is not possible it
+   466: // panics if s.CanFail is false and returns nil if s.CanFail is true.
+=> 467: func typeAssert(s *abi.TypeAssert, t *_type) *itab {  // Key Point 1. `runtime.typeAssert` is involved.
+   468:         var tab *itab
+   469:         if t == nil {
+   470:                 if !s.CanFail {
+   471:                         panic(&TypeAssertionError{nil, nil, &s.Inter.Type, ""})
+   472:                 }
+(dlv) c
+> [Breakpoint 2] runtime.getitab() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:44 (hits goroutine(1):1 total:1) (PC: 0x10304604c)
+Warning: debugging optimized function
+    39: //
+    40: // Do not remove or change the type signature.
+    41: // See go.dev/issue/67401.
+    42: //
+    43: //go:linkname getitab
+=>  44: func getitab(inter *interfacetype, typ *_type, canfail bool) *itab { // Key Point 2. `runtime.getitab` is involved.
+    45:         if len(inter.Methods) == 0 {
+    46:                 throw("internal error - misuse of itab")
+    47:         }
+    48:
+    49:         // easy case
+
+(dlv) p inter
+("*internal/abi.InterfaceType")(0x102b5b9e0)
+*internal/abi.InterfaceType {
+        Type: internal/abi.Type {Size_: 16, PtrBytes: 16, Hash: 2321956729, TFlag: TFlagUncommon|TFlagExtraStar|TFlagNamed (7), Align_: 8, FieldAlign_: 8, Kind_: Interface (20), Equal: runtime.interequal, GCData: *2, Str: 22216, PtrToThis: 25056},
+        PkgPath: internal/abi.Name {Bytes: *0},
+        Methods: []internal/abi.Imethod len: 2, cap: 2, [
+                (*"internal/abi.Imethod")(0x102b5ba40),
+                (*"internal/abi.Imethod")(0x102b5ba48),
+        ],}
+(dlv) p firstmoduledata.types + 22216
+4340389576
+(dlv) x -fmt hex -count 1 -size 1 4340389577
+0x102b516c9:   0x1a
+(dlv) x -fmt raw -count 26 -size 1 4340389578 // Key Point 3. check the type name of `inter`, the 1st parameter of `runtime.getitab`. It's actually `People`
+*interface_examples.People(dlv)
+(dlv) p typ
+("*internal/abi.Type")(0x102b5a660)
+*internal/abi.Type {Size_: 8, PtrBytes: 8, Hash: 2452649489, TFlag: TFlagUncommon|TFlagRegularMemory (9), Align_: 8, FieldAlign_: 8, Kind_: Int|Int16|Complex128|KindDirectIface (54), Equal: runtime.memequal64, GCData: *1, Str: 22497, PtrToThis: 0}
+(dlv) p firstmoduledata.types + 22497
+4340389857
+(dlv) x -fmt hex -count 1 -size 1 4340389858
+0x102b517e2:   0x1b
+(dlv) x -fmt raw -count 27 -size 1 4340389859 // Key Point 4. check the type name of `typ`, the 2nd parameter of `runtime.getitab`. It's actually `Teacher`
+*interface_examples.Teacher(dlv)
+```
+
+We can find the following facts from the debugging info. (The key point are marked as `Key Point x` in the comments)
+
+1. **When the `people := p.(People)` is called, the `runtime.typeAssert()` function is triggered. And following the `runtime.getitab()` function.** (Refer to Key Point 1 and Key Point 2)
+2. **Within the process of `runtime.getitab`, if we check the `type` of the 2 parameters `inter` and `typ`, we can tell that, 
+    * The `inter` is actually the type of interface `People` and
+    * the `typ` is actually the type of `Teacher`**
+
+Yes, that's the 2nd story, when there is type assertion relevant call, such as `people := p.(People)`. 
+
+In this story function of `runtime.getitab(inter *interfacetype, typ *_type, canfail bool) *itab`, would be involved, to determine if the assertion succeed, and get the `itab` object, with which, the method based on the interface `People` can be executed. 
+
+And during this process, `itab.Hash` would be helpful. Actually, there is a global itab cache named `itabTable`, which holds the `itab`s. And the key of it, is `itab.Hash`
+
+There is one more question need to pay attention. That's the offset of the type name. For example, when we check the info about `typ` parameter, we do like this:
+
+```
+(dlv) p firstmoduledata.types + 22497
+4340389857
+(dlv) x -fmt hex -count 1 -size 1 4340389858
+0x102b517e2:   0x1b
+(dlv) x -fmt raw -count 27 -size 1 4340389859
+```
+
+We get the address by offset, and check the `index 1th` for the `length` of the name, and get the real name from `index 2nd` for the real name.  
+
+That's how the runtime handle the `Type.Str`. Refer to the code
+
+```
+type rtype struct {
+	*abi.Type // embedding is okay here (unlike reflect) because none of this is public
+}
+
+func (t rtype) string() string {
+	s := t.nameOff(t.Str).Name()
+	if t.TFlag&abi.TFlagExtraStar != 0 {
+		return s[1:]
+	}
+	return s
+}
+
+// Name returns the tag string for n, or empty if there is none.
+func (n Name) Name() string {
+	if n.Bytes == nil {
+		return ""
+	}
+	i, l := n.ReadVarint(1)
+	return unsafe.String(n.DataChecked(1+i, "non-empty string"), l)
+}
+```
+
+The magic lies in line `i, l := n.ReadVarint(1)`. In our case, `i` would be 1, and `l` is the really length of the type name. For `Teacher` and `Student`, is 27 and `People`, 26.
+
+In short, the layout would be like this:
+
+```
+[0] byte: flags
+[1] byte: length
+[2:]     : UTF-8 string of that length
+```
 
 
 ### References

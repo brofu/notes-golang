@@ -99,7 +99,15 @@ func (i *NilInterfaceExample) Run(ctx context.Context) error {
 }
 
 func ShowExample(ctx context.Context) {
-	showExampleMethodCall(ctx)
+	showExampleMethodCallV3(ctx)
+}
+
+func showExampleMethodCallV3(ctx context.Context) {
+	for _, p := range []interface{}{&Teacher{}, &Student{}} {
+		people := p.(People)
+		fmt.Println("method call:", people.Work())
+		fmt.Println("method call:", people.Name())
+	}
 }
 
 func showExampleMethodCallV2(ctx context.Context) {
