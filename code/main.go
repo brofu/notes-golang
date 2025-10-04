@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"golang_examples/interface_examples"
+	"golang_examples/var_examples"
 )
 
 // DebugTypeName reads a runtime internal type pointer (uintptr)
@@ -15,6 +15,8 @@ func DebugTypeName(ptr uintptr) {
 */
 
 func main() {
-	interface_examples.ShowExample(context.Background())
+	ctx := context.Background()
+	//interface_examples.ShowExample(context.Background())
 	//struct_examples.ShowExample(context.Background())
+	(&var_examples.VarDeclearExample{}).Run(ctx)
 }
