@@ -1,0 +1,643 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Principles · Brofu's Talk</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="01-code.html" />
+    
+    
+    <link rel="prev" href="readme.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../01-specification/readme.html">
+            
+                <a href="../../01-specification/readme.html">
+            
+                    
+                    Specification
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../01-specification/01-slice/readme.html">
+            
+                <a href="../../01-specification/01-slice/readme.html">
+            
+                    
+                    Slice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../01-specification/01-slice/01-understand_two_addresses.html">
+            
+                <a href="../../01-specification/01-slice/01-understand_two_addresses.html">
+            
+                    
+                    Understand Two Addresses
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../01-specification/02-interface/readme.html">
+            
+                <a href="../../01-specification/02-interface/readme.html">
+            
+                    
+                    Interface
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../../01-specification/02-interface/001-empty-and-non-empty-interface.html">
+            
+                <a href="../../01-specification/02-interface/001-empty-and-non-empty-interface.html">
+            
+                    
+                    Empty And Non Empty Interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../../01-specification/02-interface/200-delegation-pattern.html">
+            
+                <a href="../../01-specification/02-interface/200-delegation-pattern.html">
+            
+                    
+                    Delegation Pattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../01-specification/03-struct/readme.html">
+            
+                <a href="../../01-specification/03-struct/readme.html">
+            
+                    
+                    Struct
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../../01-specification/03-struct/01-understand_empty_struct.html">
+            
+                <a href="../../01-specification/03-struct/01-understand_empty_struct.html">
+            
+                    
+                    Understand Empty Struct
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2" data-path="../../01-specification/03-struct/02-field-alignment.html">
+            
+                <a href="../../01-specification/03-struct/02-field-alignment.html">
+            
+                    
+                    Field Alignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../../01-specification/generics.html">
+            
+                <a href="../../01-specification/generics.html">
+            
+                    
+                    Generics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../readme.html">
+            
+                <a href="../readme.html">
+            
+                    
+                    Runtime
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="readme.html">
+            
+                <a href="readme.html">
+            
+                    
+                    Gc
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1.1" data-path="00-principles.html">
+            
+                <a href="00-principles.html">
+            
+                    
+                    Principles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="01-code.html">
+            
+                <a href="01-code.html">
+            
+                    
+                    Code
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="02-tools.html">
+            
+                <a href="02-tools.html">
+            
+                    
+                    Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../sync/readme.html">
+            
+                <a href="../sync/readme.html">
+            
+                    
+                    Sync
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../03-programming_paradigms/readme.html">
+            
+                <a href="../../03-programming_paradigms/readme.html">
+            
+                    
+                    Programming Paradigms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../04-engineering/readme.html">
+            
+                <a href="../../04-engineering/readme.html">
+            
+                    
+                    Engineering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../05-interviews/readme.html">
+            
+                <a href="../../05-interviews/readme.html">
+            
+                    
+                    Interviews
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Principles</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="gc-principles">GC Principles</h1>
+<h3 id="workflows">Workflows</h3>
+<ul>
+<li><strong>Marking</strong>. The marking phase identifies which objects are still reachable from the root set (global variables, stack variables, etc.). Objects that are still in use are marked as reachable.</li>
+<li><strong>Sweeping</strong>. After marking, the sweeping phase begins. This phase reclaims the memory occupied by unreachable objects and returns it to the heap for future allocations.  </li>
+<li><strong>Pacing</strong>. The GC dynamically adjusts its pace based on the application&apos;s allocation rate. This adaptive pacing ensures that garbage collection keeps up with the application&apos;s memory usage without introducing significant pauses</li>
+</ul>
+<h3 id="marking">Marking</h3>
+<h4 id="tri-color-marking-algorithm">Tri-color Marking Algorithm</h4>
+<p><strong>Roles</strong></p>
+<p>Objects are marked with 3 colors, </p>
+<ul>
+<li>white (unreachable),  </li>
+<li>gray (reachable but not fully processed), and </li>
+<li>black (reachable and fully processed). </li>
+</ul>
+<p><strong>Workflow</strong></p>
+<ol>
+<li>Inital State <ul>
+<li>Initially, all objects in the heap are conceptually <strong>white</strong>. </li>
+<li>The GC starts with a small number of <code>roots</code>, which are marked <strong>grepy</strong> and added to the grey set</li>
+<li><code>Roots</code> are the entry points to the object graph (<strong>global variables, stack variables, and registers</strong>).</li>
+</ul>
+</li>
+<li>Marking Phase<ul>
+<li>The algorithm processes each <strong>gray</strong> node by marking it <strong>black</strong> and processing its references. </li>
+<li>If a referenced node is <strong>white</strong>, it is marked <strong>gray</strong> and added to the gray set.</li>
+<li>Repeat this process.</li>
+<li>This process is running concurrently and incrementally.</li>
+</ul>
+</li>
+<li>Marking Completion<ul>
+<li>When the <strong>gray</strong> set is empty, all reachable nodes are <strong>black</strong>.</li>
+<li>Any remaining <strong>white</strong> nodes are unreachable and can be reclaimed by the garbage collector.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Features</strong></p>
+<ol>
+<li>The <code>STW</code> time is very short. How?<ul>
+<li><strong>Concurrent Marking</strong>.  The Go GC is concurrent, meaning it can run alongside the application (mutator). </li>
+<li><strong>Incremental Marking</strong>. The marking work is broken down into small chunks, and the objects are being marked incrementally. </li>
+</ul>
+</li>
+</ol>
+<p><strong>Questions</strong></p>
+<ol>
+<li><p>How make sure all the objects are correctly marked? (Given that the marking progress is running concurrently with the application)</p>
+<ul>
+<li>The GC uses a `write barrier to ensure that any changes to object references made by the application are correctly tracked during the marking phase.</li>
+<li>Tri-Color Invariant<ul>
+<li>No <strong>black</strong> object points to a <strong>white</strong> object. This ensures that all reachable objects are eventually marked.</li>
+<li>If a <strong>gray</strong> object points to a <strong>white</strong> object, the <strong>white</strong> object is also marked <strong>gray</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Why Golang GC can NOT remove the <code>STW</code> event totally?</p>
+<p>There are several scenarios the GC need to STW to make sure the process correctly.</p>
+<p>a. <code>Roots</code> Scan.</p>
+<ul>
+<li>Roots of All goroutines need to scan, which includes <code>global variables, local variables and registers</code>. In a concurrent system like Go, where multiple goroutines are running, each goroutine&#x2019;s stack and registers may contain references to heap objects. These are part of the root set that needs to be scanned.</li>
+<li>Ensuring Consistency: To get a consistent snapshot of the roots, the GC must pause all goroutines at safe points. This ensures that no references are modified while the GC is scanning the roots, preventing inconsistencies.</li>
+</ul>
+<p>b. <code>Write Barriers</code> and <code>Tri-color Invariant</code></p>
+<ul>
+<li>During certain phases, the GC may need to apply these write barriers globally, requiring a brief pause to update references and maintain consistency.</li>
+</ul>
+<p>c. Concurrent Marking Completion</p>
+<ul>
+<li>STW for another cycle of <code>Roots</code> scan.</li>
+<li>Prepare for the Transition to Sweep Phase. (To make sure the marking is completely finished also. <span style="color:red"><strong>TODO</strong></span>: More checking)</li>
+</ul>
+</li>
+<li><p>An example of STW event caused by <code>Write Barriers</code> and <code>Tri-color Invariant</code>?</p>
+<p>Let&apos;s check this code.</p>
+<pre><code> package main
+
+ import (
+     &quot;runtime&quot;
+     &quot;time&quot;
+ )
+
+ type Node struct {
+     value int
+     next  *Node
+ }
+
+ func main() {
+     root := &amp;Node{value: 1}
+     root.next = &amp;Node{value: 2}
+     root.next.next = &amp;Node{value: 3}
+
+     // Start a goroutine that mutates the object graph
+     go func() {
+         for {
+             root.next.next = &amp;Node{value: 4}
+             time.Sleep(100 * time.Millisecond)
+         }
+     }()
+
+     // Trigger periodic garbage collections
+     for i := 0; i &lt; 10; i++ {
+         runtime.GC() // This triggers a GC cycle with potential STW pauses
+         time.Sleep(500 * time.Millisecond)
+     }
+ }
+</code></pre><ul>
+<li>Before Mutation: root -&gt; black, root.next -&gt; black, root.next.next -&gt; white </li>
+<li>During Mutation: The application changes root.next.next to point to a new node, which is white. The write barrier ensures that the new node is marked gray if it is white, maintaining the tri-color invariant.</li>
+<li>After Mutation: The GC can then safely continue its marking phase.
+<span style="color:red"><strong>TODO</strong></span>: More checking</li>
+</ul>
+</li>
+<li><p>In the question of 3. Is it OK to stop the goroutine which is updating the <code>root.next.next</code> ONLY? Why need to <code>STW</code>?
+<span style="color:red"><strong>TODO</strong></span>: More checking</p>
+</li>
+</ol>
+<h3 id="sweeping">Sweeping</h3>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="readme.html" class="navigation navigation-prev " aria-label="Previous page: Gc">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="01-code.html" class="navigation navigation-next " aria-label="Next page: Code">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Principles","level":"1.3.1.1","depth":3,"next":{"title":"Code","level":"1.3.1.2","depth":3,"path":"02-runtime/31-gc/01-code.md","ref":"02-runtime/31-gc/01-code.md","articles":[]},"previous":{"title":"Gc","level":"1.3.1","depth":2,"path":"02-runtime/31-gc/readme.md","ref":"02-runtime/31-gc/readme.md","articles":[{"title":"Principles","level":"1.3.1.1","depth":3,"path":"02-runtime/31-gc/00-principles.md","ref":"02-runtime/31-gc/00-principles.md","articles":[]},{"title":"Code","level":"1.3.1.2","depth":3,"path":"02-runtime/31-gc/01-code.md","ref":"02-runtime/31-gc/01-code.md","articles":[]},{"title":"Tools","level":"1.3.1.3","depth":3,"path":"02-runtime/31-gc/02-tools.md","ref":"02-runtime/31-gc/02-tools.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["plantuml-cloud","disqus"],"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"plantuml-cloud":{"umlPath":"images/uml","protocol":"http","type":"plantuml-server","host":"www.plantuml.com","port":"80","path":"/plantuml/svg"},"disqus":{"useIdentifier":false,"shortName":"brofu-tech"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"sortedBy":"-","variables":{},"title":"Brofu's Talk","gitbook":"*"},"file":{"path":"02-runtime/31-gc/00-principles.md","mtime":"2025-10-04T01:39:04.512Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-10-04T01:39:45.672Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

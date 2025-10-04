@@ -1,0 +1,894 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Empty And Non Empty Interface · Brofu's Talk</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="200-delegation-pattern.html" />
+    
+    
+    <link rel="prev" href="readme.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../readme.html">
+            
+                <a href="../readme.html">
+            
+                    
+                    Specification
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../01-slice/readme.html">
+            
+                <a href="../01-slice/readme.html">
+            
+                    
+                    Slice
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../01-slice/01-understand_two_addresses.html">
+            
+                <a href="../01-slice/01-understand_two_addresses.html">
+            
+                    
+                    Understand Two Addresses
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="readme.html">
+            
+                <a href="readme.html">
+            
+                    
+                    Interface
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.2.1" data-path="001-empty-and-non-empty-interface.html">
+            
+                <a href="001-empty-and-non-empty-interface.html">
+            
+                    
+                    Empty And Non Empty Interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="200-delegation-pattern.html">
+            
+                <a href="200-delegation-pattern.html">
+            
+                    
+                    Delegation Pattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../03-struct/readme.html">
+            
+                <a href="../03-struct/readme.html">
+            
+                    
+                    Struct
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../03-struct/01-understand_empty_struct.html">
+            
+                <a href="../03-struct/01-understand_empty_struct.html">
+            
+                    
+                    Understand Empty Struct
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3.2" data-path="../03-struct/02-field-alignment.html">
+            
+                <a href="../03-struct/02-field-alignment.html">
+            
+                    
+                    Field Alignment
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../generics.html">
+            
+                <a href="../generics.html">
+            
+                    
+                    Generics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../02-runtime/readme.html">
+            
+                <a href="../../02-runtime/readme.html">
+            
+                    
+                    Runtime
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../02-runtime/31-gc/readme.html">
+            
+                <a href="../../02-runtime/31-gc/readme.html">
+            
+                    
+                    Gc
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../02-runtime/31-gc/00-principles.html">
+            
+                <a href="../../02-runtime/31-gc/00-principles.html">
+            
+                    
+                    Principles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.2" data-path="../../02-runtime/31-gc/01-code.html">
+            
+                <a href="../../02-runtime/31-gc/01-code.html">
+            
+                    
+                    Code
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.1.3" data-path="../../02-runtime/31-gc/02-tools.html">
+            
+                <a href="../../02-runtime/31-gc/02-tools.html">
+            
+                    
+                    Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../02-runtime/sync/readme.html">
+            
+                <a href="../../02-runtime/sync/readme.html">
+            
+                    
+                    Sync
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../03-programming_paradigms/readme.html">
+            
+                <a href="../../03-programming_paradigms/readme.html">
+            
+                    
+                    Programming Paradigms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../04-engineering/readme.html">
+            
+                <a href="../../04-engineering/readme.html">
+            
+                    
+                    Engineering
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../05-interviews/readme.html">
+            
+                <a href="../../05-interviews/readme.html">
+            
+                    
+                    Interviews
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Empty And Non Empty Interface</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="empty-vs-non-empty-interface">Empty V.S. Non-Empty Interface</h2>
+<h3 id="concepts">Concepts</h3>
+<pre><code>// empty interface
+interface {}
+
+// non-empty interface
+interface {
+  Method() 
+}
+</code></pre><p>As we know, in Go, an interface variable is a two-part structure:</p>
+<ol>
+<li><code>Type</code>: A pointer to the concrete type of the value it holds.</li>
+<li><code>Value</code>: A pointer to the actual data.</li>
+</ol>
+<p>But, what&apos;s the story under layer? How does an <code>empty</code> and <code>non-empty</code> store such above mentioned 2 parts?</p>
+<h3 id="the-under-layer-struct-for-empty-and-non-empty-interface">The Under Layer Struct for Empty and Non-Empty Interface</h3>
+<p>Let&apos;s check the source code with version <code>v1.23</code></p>
+<pre><code>// go1.23/src/runtime/runtime2.go
+
+type itab = abi.ITab
+type _type = abi.Type
+
+type iface struct { // presentation of non-empty interface
+    tab  *itab
+    data unsafe.Pointer
+}
+
+type eface struct { // presentation of empty interface
+    _type *_type
+    data  unsafe.Pointer
+}
+
+// go1.23/src/internal/abi/type.go
+
+// Type is the runtime representation of a Go type.
+//
+// Be careful about accessing this type at build time, as the version
+// of this type in the compiler/linker may not have the same layout
+// as the version in the target binary, due to pointer width
+// differences and any experiments. Use cmd/compile/internal/rttype
+// or the functions in compiletype.go to access this type instead.
+// (TODO: this admonition applies to every type in this package.
+// Put it in some shared location?)
+type Type struct {
+    Size_       uintptr
+    PtrBytes    uintptr // number of (prefix) bytes in the type that can contain pointers
+    Hash        uint32  // hash of type; avoids computation in hash tables
+    TFlag       TFlag   // extra type information flags
+    Align_      uint8   // alignment of variable with this type
+    FieldAlign_ uint8   // alignment of struct field with this type
+    Kind_       Kind    // enumeration for C
+    // function for comparing objects of this type
+    // (ptr to object A, ptr to object B) -&gt; ==?
+    Equal func(unsafe.Pointer, unsafe.Pointer) bool
+    // GCData stores the GC type data for the garbage collector.
+    // If the KindGCProg bit is set in kind, GCData is a GC program.
+    // Otherwise it is a ptrmask bitmap. See mbitmap.go for details.
+    GCData    *byte
+    Str       NameOff // string form
+    PtrToThis TypeOff // type for pointer to this type, may be zero
+}
+
+// go1.23/src/internal/abi/iface.go
+
+// The first word of every non-empty interface type contains an *ITab.
+// It records the underlying concrete type (Type), the interface type it
+// is implementing (Inter), and some ancillary information.
+//
+// allocated in non-garbage-collected memory
+type ITab struct {
+    Inter *InterfaceType
+    Type  *Type
+    Hash  uint32     // copy of Type.Hash. Used for type switches.
+    Fun   [1]uintptr // variable sized. fun[0]==0 means Type does not implement Inter.
+}
+</code></pre><p>From the code snippet, we can tell that,</p>
+<ol>
+<li>For an <code>empty</code> and <code>non-empty</code> interface, there is a <code>data</code> filed, which is used to store the pointer to the <code>Value</code> </li>
+<li>For an <code>empty</code> interface, there is a field <code>_type</code> to keep the concrete <code>Type</code> of the data it holds    </li>
+<li>For an <code>non-empty</code> interface, there is a <code>ITab</code> field, in which there are some important fields:<ul>
+<li><code>Inter</code>. Keeps the specific <code>interface type</code></li>
+<li><code>Type</code>. Same as the <code>Type</code> in <code>eface</code>, keep the concrete <code>Type</code> of the data it holds</li>
+<li><code>Fun</code>. Keeps the functions (an array of functions) implemented by the data. Yes, you are right, all the methods defined by the interface should be present here.</li>
+</ul>
+</li>
+</ol>
+<h3 id="how-is-the-method-call-for-a-non-empty-interface-processed">How Is the Method-Call for a <code>Non-Empty</code> Interface Processed</h3>
+<p>So, for an <code>non-empty interface</code>, what&apos;s workflow when we call an method based on it? Let&apos;s check this code </p>
+<pre><code>type People interface {
+    Name() string
+    Work() string
+}
+
+type Teacher struct{}
+
+func (t *Teacher) Name() string {
+    return &quot;teacher&quot;
+}
+
+func (t *Teacher) Work() string {
+    return &quot;teach&quot;
+}
+
+type Student struct{}
+
+func (s *Student) Name() string {
+    return &quot;student&quot;
+}
+
+func (s *Student) Work() string {
+    return &quot;study&quot;
+}
+
+func showExampleMethodCallV2(ctx context.Context) {
+    for _, p := range []People{&amp;Teacher{}, &amp;Student{}} {
+        fmt.Println(&quot;method call:&quot;, p.Work())
+        fmt.Println(&quot;method call:&quot;, p.Name())
+    }
+}
+</code></pre><p>Please note, there are 2 key points of these code snippet. And we would explain this later.</p>
+<ol>
+<li><strong>There is a slice of <code>People</code>, with 2 different concrete types, say that, <code>Student</code> and <code>Teacher</code>.</strong></li>
+<li><strong><code>Work()</code> method is defined secondly, but called firstly, while <code>Name()</code> is reverse.</strong> </li>
+</ol>
+<p>OK. In short, the workflow would be (roughly) like this:</p>
+<ol>
+<li>Get the method pointer (<code>Name()</code> or <code>Work()</code>) from the <code>iface.*table.Fun</code></li>
+<li>Get the concrete data pointer by <code>iface.data</code></li>
+<li>Call the method with concrete data as the 1st parameter</li>
+</ol>
+<p>Let&apos;s verify this by debugging the above code snippet.</p>
+<p>The debugging info showed as following, when calling <code>p.Work()</code>. Pay attention to the comments inline.</p>
+<pre><code>        interface_exmaples.go:106       0x1024c99c4     e18b40f9        MOVD 272(RSP), R1
+        interface_exmaples.go:106       0x1024c99c8     220040f9        MOVD (R1), R2   // R2 get `itab` data, by pointer
+        interface_exmaples.go:106       0x1024c99cc     200440f9        MOVD 8(R1), R0  // R0 get the `iface.data`, by pointer
+        interface_exmaples.go:106       0x1024c99d0     e22300f9        MOVD R2, 64(RSP)
+        interface_exmaples.go:106       0x1024c99d4     e02700f9        MOVD R0, 72(RSP)
+        interface_exmaples.go:107       0x1024c99d8*    5b008039        MOVB (R2), R27
+=&gt;      interface_exmaples.go:107       0x1024c99dc     411040f9        MOVD 32(R2), R1 // R1 the method `Work()`, by pointer. Why it&apos;s (R2) + 32?
+        interface_exmaples.go:107       0x1024c99e0     20003fd6        CALL (R1) // call the `Work()` method, with R0 as the 1st parameter.
+</code></pre><p>Note: </p>
+<blockquote>
+<p>On Apple Silicon (ARM64), Go follows the Plan 9 ABI, where the first argument to a function is passed in R0.</p>
+<p>-- By ChatGPT</p>
+</blockquote>
+<p>When call <code>p.Name()</code>. Pay attention to the comments inline.</p>
+<pre><code>&gt; [Breakpoint 3] golang_examples/interface_examples.showExampleMethodCallV2() ./interface_examples/interface_exmaples.go:108 (hits goroutine(1):1 total:1) (PC: 0x1024c9ab0)
+   103: }
+   104:
+   105: func showExampleMethodCallV2(ctx context.Context) {
+   106:         for _, p := range []People{&amp;Teacher{}, &amp;Student{}} {
+   107:                 fmt.Println(&quot;method call:&quot;, p.Work())
+=&gt; 108:                 fmt.Println(&quot;method call:&quot;, p.Name())
+   109:         }
+   110: }
+   111:
+   112: func showExampleMethodCall(ctx context.Context) {
+   113:         var stu People = &amp;Student{}
+(dlv) si
+&gt; golang_examples/interface_examples.showExampleMethodCallV2() ./interface_examples/interface_exmaples.go:108 (PC: 0x1024c9ab4)
+        interface_exmaples.go:107       0x1024c9aa0     e28300f9        MOVD R2, 256(RSP)
+        interface_exmaples.go:107       0x1024c9aa4     e28700f9        MOVD R2, 264(RSP)
+        interface_exmaples.go:107       0x1024c9aa8     e10302aa        MOVD R2, R1
+        interface_exmaples.go:107       0x1024c9aac     15edff97        CALL fmt.Println(SB)
+        interface_exmaples.go:108       0x1024c9ab0*    e32340f9        MOVD 64(RSP), R3
+=&gt;      interface_exmaples.go:108       0x1024c9ab4     7b008039        MOVB (R3), R27
+        interface_exmaples.go:108       0x1024c9ab8     630c40f9        MOVD 24(R3), R3  // R3 now holds the pointer of `Name()` method. Why the address is (R3)+24? 
+        interface_exmaples.go:108       0x1024c9abc     e02740f9        MOVD 72(RSP), R0 // R0 get the `iface.data` from (RSP) + 72, which is set when process `p.Work()`
+        interface_exmaples.go:108       0x1024c9ac0     60003fd6        CALL (R3) // call the `Name()` method, with R0 as the 1st parameter.
+        interface_exmaples.go:108       0x1024c9ac4     e04700f9        MOVD R0, 136(RSP)
+        interface_exmaples.go:108       0x1024c9ac8     e14b00f9        MOVD R1, 144(RSP)
+(dlv)
+</code></pre><p>OK, let&apos;s back to the 2 import points mentioned previously.</p>
+<ul>
+<li><strong>Why there is a slice of <code>People</code>, with 2 different concrete types, say that, <code>Student</code> and <code>Teacher</code>?</strong></li>
+</ul>
+<p>The main purpose for this, is to let the code <code>common</code> (for example, to seek the method address by address offset), instead of by <code>function symbol</code>.</p>
+<p>For example, if we write code like this, the code would be presented by <code>function symbol</code>, and as a result, we cannot observe the <code>address offset</code> clearly.</p>
+<pre><code>func showExampleMethodCall(ctx context.Context) {
+    var stu People = &amp;Student{} 
+    fmt.Println(&quot;method call:&quot;, stu.Name()) // the compiler can get the address of name statically 
+}
+</code></pre><p>And if we debug this line, we would get this. Pay attention to the <code>CALL</code> instruction. </p>
+<pre><code>kpoint 3] golang_examples/interface_examples.showExampleMethodCall() ./interface_examples/interface_exmaples.go:114 (hits goroutine(1):1 total:1) (PC: 0x102199310)
+   109:         }
+   110: }
+   111:
+   112: func showExampleMethodCall(ctx context.Context) {
+   113:         var stu People = &amp;Student{}
+=&gt; 114:         fmt.Println(&quot;method call:&quot;, stu.Name())
+   115: }
+   116:
+   117: func showExample(ctx context.Context) {
+   118:
+   119:         examples := []example.GoExample{&amp;NilInterfaceExample{}}
+(dlv) si
+&gt; golang_examples/interface_examples.showExampleMethodCall() ./interface_examples/interface_exmaples.go:114 (PC: 0x102199314)
+        interface_exmaples.go:113       0x102199300     a10100d0        ADRP 221184(PC), R1
+        interface_exmaples.go:113       0x102199304     21801691        ADD $1440, R1, R1
+        interface_exmaples.go:113       0x102199308     e11700f9        MOVD R1, 40(RSP)
+        interface_exmaples.go:113       0x10219930c     e01b00f9        MOVD R0, 48(RSP)
+        interface_exmaples.go:114       0x102199310*    01000014        JMP 1(PC)
+=&gt;      interface_exmaples.go:114       0x102199314     e02f00f9        MOVD R0, 88(RSP)
+        interface_exmaples.go:114       0x102199318     caffff97        CALL golang_examples/interface_examples.(*Student).Name(SB) // Show by function symbol.
+        interface_exmaples.go:114       0x10219931c     e04700f9        MOVD R0, 136(RSP)
+        interface_exmaples.go:114       0x102199320     e14b00f9        MOVD R1, 144(RSP)
+        interface_exmaples.go:114       0x102199324     ffff06a9        STP (ZR, ZR), 104(RSP)
+        interface_exmaples.go:114       0x102199328     ffff07a9        STP (ZR, ZR), 120(RSP)
+</code></pre><p>As we can see, the address of <code>Name()</code> is presented by the <code>a Function Symbol</code>. And there is NO procedure of <code>getting the address</code> triggered.</p>
+<ul>
+<li><strong><code>Work()</code> method is defined secondly, but called firstly, while <code>Name()</code> is reverse</strong>. </li>
+</ul>
+<p>This is key reason why the address of <code>Name()</code> is <code>24(R3)</code>, while that of <code>Work()</code> is <code>32(R2)</code>. Let&apos;s back to the definition of <code>runtime.itab</code></p>
+<pre><code>type ITab struct {
+    Inter *InterfaceType
+    Type  *Type
+    Hash  uint32     // copy of Type.Hash. Used for type switches.
+    Fun   [1]uintptr // variable sized. fun[0]==0 means Type does not implement Inter.
+}
+</code></pre><p>After <code>memory padding</code>, the actual layout of <code>ITab</code> is like this </p>
+<pre><code>type ITab struct {
+    Inter *Interfacetype // 8 bytes, offset 0
+    Type *Type           // 8 bytes, offset 8
+    hash  uint32         // 4 bytes, offset 16
+    _     [4]byte        // 4 bytes, offset 20, padding for alignment
+    Fun   [1]uintptr     // offset 24, start of method pointers, its length depends on the method number of the interface, and each pointer has the size of 8 bytes
+}
+</code></pre><p>So, the offset of the 1st method (in the order of definition in the interface, here, it&apos;s <code>People</code>) <code>Name()</code> is <code>start_address</code> + 24, and </p>
+<p>The offset of the 2nd method <code>Work()</code> is <code>start_address</code> + 32.</p>
+<h3 id="another-story-for-method-call-to-non-empty-interface">Another Story For Method Call to <code>Non-Empty</code> Interface</h3>
+<p>We just talked about the way of method call on <code>non-empty interface</code> like this </p>
+<pre><code>func showExampleMethodCallV2(ctx context.Context) {
+    for _, p := range []People{&amp;Teacher{}, &amp;Student{}} {
+        fmt.Println(&quot;method call:&quot;, p.Work())
+        fmt.Println(&quot;method call:&quot;, p.Name())
+    }
+}
+</code></pre><p>Now, let&apos;s check a different one, say that, </p>
+<pre><code>func showExampleMethodCallV3(ctx context.Context) {
+    for _, p := range []interface{}{&amp;Teacher{}, &amp;Student{}} {
+        people := p.(People)
+        fmt.Println(&quot;method call:&quot;, people.Work())
+        fmt.Println(&quot;method call:&quot;, people.Name())
+    }
+}
+</code></pre><p>The difference of this version is that, the slice type is actually <code>[]interface{}</code>, and before the method <code>Name()</code> or<code>Work()</code> is called, a type assertion is necessary.</p>
+<p>Let&apos;s debug this to find out the under layer story. (To do this, we need to setup a break point at <code>runtime.getitab</code>)</p>
+<pre><code>(dlv) b runtime.typeAssert
+Breakpoint 3 set at 0x102fee27c for runtime.typeAssert() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:467
+(dlv) b runtime.assertE2I
+Breakpoint 4 set at 0x102fee17c for runtime.assertE2I() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:449
+(dlv) b runtime.assertE2I2
+Breakpoint 5 set at 0x102fee21c for runtime.assertE2I2() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:457
+(dlv) b 107
+Breakpoint 6 set at 0x1030999d8 for golang_examples/interface_examples.showExampleMethodCallV3() ./interface_examples/interface_exmaples.go:107
+(dlv) c
+&gt; [Breakpoint 6] golang_examples/interface_examples.showExampleMethodCallV3() ./interface_examples/interface_exmaples.go:107 (hits goroutine(1):1 total:1) (PC: 0x1030999d8)
+   102:         showExampleMethodCallV3(ctx)
+   103: }
+   104:
+   105: func showExampleMethodCallV3(ctx context.Context) {
+   106:         for _, p := range []interface{}{&amp;Teacher{}, &amp;Student{}} {
+=&gt; 107:                 people := p.(People)
+   108:                 fmt.Println(&quot;method call:&quot;, people.Work())
+   109:                 fmt.Println(&quot;method call:&quot;, people.Name())
+   110:         }
+   111: }
+   112:
+(dlv) c
+&gt; [Breakpoint 3] runtime.typeAssert() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:467 (hits goroutine(1):1 total:1) (PC: 0x102fee27c)
+Warning: debugging optimized function
+   462: }
+   463:
+   464: // typeAssert builds an itab for the concrete type t and the
+   465: // interface type s.Inter. If the conversion is not possible it
+   466: // panics if s.CanFail is false and returns nil if s.CanFail is true.
+=&gt; 467: func typeAssert(s *abi.TypeAssert, t *_type) *itab {  // Key Point 1. `runtime.typeAssert` is involved.
+   468:         var tab *itab
+   469:         if t == nil {
+   470:                 if !s.CanFail {
+   471:                         panic(&amp;TypeAssertionError{nil, nil, &amp;s.Inter.Type, &quot;&quot;})
+   472:                 }
+(dlv) c
+&gt; [Breakpoint 2] runtime.getitab() /Users/jeff_shao/.gvm/gos/go1.23/src/runtime/iface.go:44 (hits goroutine(1):1 total:1) (PC: 0x10304604c)
+Warning: debugging optimized function
+    39: //
+    40: // Do not remove or change the type signature.
+    41: // See go.dev/issue/67401.
+    42: //
+    43: //go:linkname getitab
+=&gt;  44: func getitab(inter *interfacetype, typ *_type, canfail bool) *itab { // Key Point 2. `runtime.getitab` is involved.
+    45:         if len(inter.Methods) == 0 {
+    46:                 throw(&quot;internal error - misuse of itab&quot;)
+    47:         }
+    48:
+    49:         // easy case
+
+(dlv) p inter
+(&quot;*internal/abi.InterfaceType&quot;)(0x102b5b9e0)
+*internal/abi.InterfaceType {
+        Type: internal/abi.Type {Size_: 16, PtrBytes: 16, Hash: 2321956729, TFlag: TFlagUncommon|TFlagExtraStar|TFlagNamed (7), Align_: 8, FieldAlign_: 8, Kind_: Interface (20), Equal: runtime.interequal, GCData: *2, Str: 22216, PtrToThis: 25056},
+        PkgPath: internal/abi.Name {Bytes: *0},
+        Methods: []internal/abi.Imethod len: 2, cap: 2, [
+                (*&quot;internal/abi.Imethod&quot;)(0x102b5ba40),
+                (*&quot;internal/abi.Imethod&quot;)(0x102b5ba48),
+        ],}
+(dlv) p firstmoduledata.types + 22216
+4340389576
+(dlv) x -fmt hex -count 1 -size 1 4340389577
+0x102b516c9:   0x1a
+(dlv) x -fmt raw -count 26 -size 1 4340389578 // Key Point 3. check the type name of `inter`, the 1st parameter of `runtime.getitab`. It&apos;s actually `People`
+*interface_examples.People(dlv)
+(dlv) p typ
+(&quot;*internal/abi.Type&quot;)(0x102b5a660)
+*internal/abi.Type {Size_: 8, PtrBytes: 8, Hash: 2452649489, TFlag: TFlagUncommon|TFlagRegularMemory (9), Align_: 8, FieldAlign_: 8, Kind_: Int|Int16|Complex128|KindDirectIface (54), Equal: runtime.memequal64, GCData: *1, Str: 22497, PtrToThis: 0}
+(dlv) p firstmoduledata.types + 22497
+4340389857
+(dlv) x -fmt hex -count 1 -size 1 4340389858
+0x102b517e2:   0x1b
+(dlv) x -fmt raw -count 27 -size 1 4340389859 // Key Point 4. check the type name of `typ`, the 2nd parameter of `runtime.getitab`. It&apos;s actually `Teacher`
+*interface_examples.Teacher(dlv)
+</code></pre><p>We can find the following facts from the debugging info. (The key point are marked as <code>Key Point x</code> in the comments)</p>
+<ol>
+<li><strong>When the <code>people := p.(People)</code> is called, the <code>runtime.typeAssert()</code> function is triggered. And following the <code>runtime.getitab()</code> function.</strong> (Refer to Key Point 1 and Key Point 2)</li>
+<li>**Within the process of <code>runtime.getitab</code>, if we check the <code>type</code> of the 2 parameters <code>inter</code> and <code>typ</code>, we can tell that, <ul>
+<li>The <code>inter</code> is actually the type of interface <code>People</code> and</li>
+<li>the <code>typ</code> is actually the type of <code>Teacher</code>**</li>
+</ul>
+</li>
+</ol>
+<p>Yes, that&apos;s the 2nd story, when there is type assertion relevant call, such as <code>people := p.(People)</code>. </p>
+<p>In this story function of <code>runtime.getitab(inter *interfacetype, typ *_type, canfail bool) *itab</code>, would be involved, to determine if the assertion succeed, and get the <code>itab</code> object, with which, the method based on the interface <code>People</code> can be executed. </p>
+<p>And during this process, <code>itab.Hash</code> would be helpful. Actually, there is a global itab cache named <code>itabTable</code>, which holds the <code>itab</code>s. And the key of it, is <code>itab.Hash</code></p>
+<p>There is one more question need to pay attention. That&apos;s the offset of the type name. For example, when we check the info about <code>typ</code> parameter, we do like this:</p>
+<pre><code>(dlv) p firstmoduledata.types + 22497
+4340389857
+(dlv) x -fmt hex -count 1 -size 1 4340389858
+0x102b517e2:   0x1b
+(dlv) x -fmt raw -count 27 -size 1 4340389859
+</code></pre><p>We get the address by offset, and check the <code>index 1th</code> for the <code>length</code> of the name, and get the real name from <code>index 2nd</code> for the real name.  </p>
+<p>That&apos;s how the runtime handle the <code>Type.Str</code>. Refer to the code</p>
+<pre><code>type rtype struct {
+    *abi.Type // embedding is okay here (unlike reflect) because none of this is public
+}
+
+func (t rtype) string() string {
+    s := t.nameOff(t.Str).Name()
+    if t.TFlag&amp;abi.TFlagExtraStar != 0 {
+        return s[1:]
+    }
+    return s
+}
+
+// Name returns the tag string for n, or empty if there is none.
+func (n Name) Name() string {
+    if n.Bytes == nil {
+        return &quot;&quot;
+    }
+    i, l := n.ReadVarint(1)
+    return unsafe.String(n.DataChecked(1+i, &quot;non-empty string&quot;), l)
+}
+</code></pre><p>The magic lies in line <code>i, l := n.ReadVarint(1)</code>. In our case, <code>i</code> would be 1, and <code>l</code> is the really length of the type name. For <code>Teacher</code> and <code>Student</code>, is 27 and <code>People</code>, 26.</p>
+<p>In short, the layout would be like this:</p>
+<pre><code>[0] byte: flags
+[1] byte: length
+[2:]     : UTF-8 string of that length
+</code></pre><h3 id="references">References</h3>
+<ol>
+<li>Golang Source Code V1.23</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="readme.html" class="navigation navigation-prev " aria-label="Previous page: Interface">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="200-delegation-pattern.html" class="navigation navigation-next " aria-label="Next page: Delegation Pattern">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Empty And Non Empty Interface","level":"1.2.2.1","depth":3,"next":{"title":"Delegation Pattern","level":"1.2.2.2","depth":3,"path":"01-specification/02-interface/200-delegation-pattern.md","ref":"01-specification/02-interface/200-delegation-pattern.md","articles":[]},"previous":{"title":"Interface","level":"1.2.2","depth":2,"path":"01-specification/02-interface/readme.md","ref":"01-specification/02-interface/readme.md","articles":[{"title":"Empty And Non Empty Interface","level":"1.2.2.1","depth":3,"path":"01-specification/02-interface/001-empty-and-non-empty-interface.md","ref":"01-specification/02-interface/001-empty-and-non-empty-interface.md","articles":[]},{"title":"Delegation Pattern","level":"1.2.2.2","depth":3,"path":"01-specification/02-interface/200-delegation-pattern.md","ref":"01-specification/02-interface/200-delegation-pattern.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["plantuml-cloud","disqus"],"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"plantuml-cloud":{"umlPath":"images/uml","protocol":"http","type":"plantuml-server","host":"www.plantuml.com","port":"80","path":"/plantuml/svg"},"disqus":{"useIdentifier":false,"shortName":"brofu-tech"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"sortedBy":"-","variables":{},"title":"Brofu's Talk","gitbook":"*"},"file":{"path":"01-specification/02-interface/001-empty-and-non-empty-interface.md","mtime":"2025-10-04T01:39:04.511Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-10-04T01:39:45.672Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
